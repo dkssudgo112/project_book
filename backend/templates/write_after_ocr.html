@@ -1,0 +1,94 @@
+<!doctype html>
+<html>
+  <head>
+    <title> 책영감 </title>
+    <link rel="stylesheet" type='text/css' href="{{ url_for('static', filename='css/global.css') }}">
+    <link rel="stylesheet" type='text/css' href="{{ url_for('static', filename='css/button.css') }}">
+    <link rel="stylesheet" type='text/css' href="{{ url_for('static', filename='css/write.css') }}">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <style>
+      .imageInput {
+        margin-top: 21px;
+        margin-bottom: 16px;
+      }
+    </style>
+    <script>
+      var today = new Date();
+      var date = today.getDate();
+      today = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+(date < 10? "0":"") + date;
+      console.log(today)
+      // document.getElementById('today').value = today;
+      document.getElementById('input#today.underline').value = today;
+    </script>
+  </head>
+  <body>
+    <!-- header -->
+    <div class="header">
+      <h1><a onclick="location.href='/'">책영감</a></h1>
+      <div class="headerInfo">
+        {%if currentUser=="" %}
+          <h3>홈</h3>
+        {% else %}
+          <h3>{{currentUser}} 님</h3>
+        {% endif %}
+        <div class="verticalDivider"></div>
+        <h3><a onclick="location.href='/upload-image'">작성하기</a></h3>
+        <!-- <h3><a onclick="location.href='/write'">작성하기</a></h3> -->
+        <div class="verticalDivider"></div>
+        {%if currentUser=="" %}
+          <h3><a onclick="location.href='/login'">로그인</a></h3>
+        {% else %}
+          <h3><a onclick="location.href='/logout'">로그아웃</a></h3>
+        {% endif %}
+      </div>
+    </div>
+
+    <!-- contents -->
+    <center>
+      <div class="column" style="max-width: 766px;">
+        <form method="post" enctype="multipart/form-data" style="width: 100%;">
+          <div class="input">
+            <h2>책제목</h2>
+            <input style="width: 83%;" class="underline" type="text" name="bookTitle" required>
+          </div>
+          <div class="input">
+            <h2>저자</h2>
+            <input style="width: 83%;" class="underline" type="text" name="author" required>
+          </div>
+          <div class="input" style="width: 100%; flex-wrap: wrap;">
+            <div class="input" style="flex-wrap: nowrap;">
+            <!-- <div class="input" style="width: 50%; flex-wrap: nowrap;"> -->
+              <h2>읽은 날짜</h2>
+              <input style="min-width: 200px; margin-left: 20%;" 
+                class="underline" type="date" name="date" id="today" value="" required>
+            </div>
+            <div class="input" style="flex-wrap: nowrap;">
+            <!-- <div class="input" style="width: 45%; flex-wrap: nowrap;"> -->
+              <h2>페이지</h2>
+              <input style="width: 75%; margin-left: 20%;" 
+                class="underline" type="text" name="page" required>
+            </div>
+            </div>
+          <div class="column">
+            {%if ocr_result!="" %}
+              <!-- <textarea type="text" class="thoughtInput" id="quote" name="ocrFinal" rows="5" cols="72"  -->
+              <textarea type="text" class="thoughtInput" id="quote" name="ocrFinal" rows="5"
+                style="width: 100%; margin-bottom: 10px;"
+              >{{ocr_result}}</textarea>
+              <!-- <textarea type="text" class="thoughtInput" name="thought" placeholder="책을 읽고 들었던 생각을 적어보세요." rows="10" cols="72"></textarea> -->
+              <textarea type="text" class="thoughtInput" name="thought" 
+                placeholder="책을 읽고 들었던 생각을 적어보세요." rows="10"
+                style="width: 100%;" required></textarea>
+            {% else %}
+              <!-- <textarea type="text" class="thoughtInput" name="thought" placeholder="책을 읽고 들었던 생각을 적어보세요." rows="15" cols="72"></textarea> -->
+              <textarea type="text" class="thoughtInput" name="thought" 
+                placeholder="책을 읽고 들었던 생각을 적어보세요." rows="10"
+                style="width: 100%;"></textarea>
+            {% endif %}
+          </div>
+          <button class="add_review" type="submit" value="add_review">등록하기</button>
+        </form>
+      </div>
+    </center>
+  </body>
+</html>

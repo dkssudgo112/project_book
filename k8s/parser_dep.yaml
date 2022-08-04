@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+        name: parser
+        labels:
+                app: parser
+spec:
+        replicas: 2
+        selector:
+                matchLabels:
+                        app: parser
+        template:
+                metadata:
+                        labels:
+                                app: parser
+                spec:
+                        containers:
+                                - name: parser
+                                  image: bookgam:latest
+                                  imagePullPolicy: IfNotPresent
+                                  ports:
+                                          - containerPort: 8001
+                                  command: ["python3"]
+                                  args: ["./backend/parser.py"]
+                                 

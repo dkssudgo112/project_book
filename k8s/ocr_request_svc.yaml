@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+        name: ocr-request-svc
+spec:
+        type: ClusterIP
+        selector:
+                app: ocr-request
+        ports:
+                - port: 8002
+                  targetPort: 8002

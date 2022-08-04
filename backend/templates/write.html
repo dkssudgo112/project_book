@@ -1,0 +1,98 @@
+<!doctype html>
+<html>
+  <head>
+    <title> 책영감 </title>
+    <link rel="stylesheet" type='text/css' href="{{ url_for('static', filename='css/global.css') }}">
+    <link rel="stylesheet" type='text/css' href="{{ url_for('static', filename='css/button.css') }}">
+    <link rel="stylesheet" type='text/css' href="{{ url_for('static', filename='css/write.css') }}">
+    <style>
+      .imageInput {
+        margin-top: 21px;
+        margin-bottom: 16px;
+      }
+    </style>
+    <script>
+      function mySubmit() {
+        var element = document.myForm;
+        window.open('/popup', '', 'width=700, height=500');
+        // window.open('/popup.html', '', 'width=500, height=500');
+      }
+    </script>
+  </head>
+  <body>
+    <!-- <div id="app">
+      {{ message }}
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+      new Vue({
+        el: "#app",
+        data: {
+          message: "Hello Vue.js!"
+        }
+      });
+    </script> -->
+    <div class="header">
+      <h1><a onclick="location.href='/'">책영감</a></h1>
+      <div class="headerInfo">
+        {%if currentUser=="" %}
+          <h3>홈</h3>
+        {% else %}
+          <h3>{{currentUser}} 님</h3>
+        {% endif %}
+        <div class="verticalDivider"></div>
+        <h3><a onclick="location.href='/upload-image'">작성하기</a></h3>
+        <!-- <h3><a onclick="location.href='/write'">작성하기</a></h3> -->
+        <div class="verticalDivider"></div>
+        {%if currentUser=="" %}
+          <h3><a onclick="location.href='/login'">로그인</a></h3>
+        {% else %}
+          <h3><a onclick="location.href='/logout'">로그아웃</a></h3>
+        {% endif %}
+      </div>
+    </div>
+    <!-- <div class="content"> -->
+      <form method="post" enctype="multipart/form-data">
+        <div class="input">
+          <h2>책제목</h2>
+          <input style="width: 600px;" class="underline" type="text" name="bookTitle">
+          <!-- <input style="width: 600px;" class="underline" type="text" name="bookTitle" required> -->
+        </div>
+        <div class="input">
+          <h2>저자</h2>
+          <input style="width: 600px;" class="underline" type="text" name="author">
+          <!-- <input style="width: 600px;" class="underline" type="text" name="author" required> -->
+        </div>
+        <div class="input">
+          <h2>읽은 날짜</h2>
+          <input style="flex-shrink: 0; margin-right: 120px;" class="underline" type="date" name="date">
+          <!-- <input style="flex-shrink: 0; margin-right: 120px;" class="underline" type="date" name="date" required> -->
+          <h2>페이지</h2>
+          <input class="underline" type="text" name="page">
+          <!-- <input class="underline" type="text" name="page" required> -->
+        </div>
+        <div class="column">
+          <!-- <form action="/write" method="POST" enctype="multipart/form-data"> -->
+            <div class="form-group">
+              <label>Select image</label>
+              <div class="custom-file">
+                <input type="file" class="custom-file-input" name="image" id="image">
+                <label class="custom-file-label" for="image">Select image...</label>
+              </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Upload</button>
+            <!-- <button type="submit" class="btn btn-primary" formaction="/">Upload</button> -->
+            <!-- <button type="button" onclick="mySubmit()">Upload</button> -->
+            <!-- <button type="submit" class="btn btn-primary" value="update_image">Upload</button> -->
+          <!-- </form> -->
+          <img src="{{ url_for('send_uploaded_file', filename=uploaded_image) }}" />
+              <!-- <input type="file" class="imageInput" name="image" accept="image/png, image/jpeg"> -->
+          <textarea type="text" class="thoughtInput" name="thought" placeholder="책을 읽고 들었던 생각을 적어보세요." rows="15" cols="60"></textarea>
+        </div>
+        <button class="register" type="submit" value="add_review">등록하기</input>
+        <!-- <button class="register" type="submit">등록하기</input> -->
+      </form>
+    <!-- </div> -->
+  </body>
+</html>

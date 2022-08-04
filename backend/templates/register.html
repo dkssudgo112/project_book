@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>책영감</title>
+    <link rel="stylesheet" type='text/css' href="{{ url_for('static', filename='css/global.css') }}">
+    <link rel="stylesheet" type='text/css' href="{{ url_for('static', filename='css/button.css') }}">
+    <link rel="stylesheet" type='text/css' href="{{ url_for('static', filename='css/login.css') }}">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <style>
+        .main {
+            margin-top: 80px;
+        }
+        .welcome {
+            font-size: 32px;
+            font-weight: bold;
+            color: #504D3F;
+            margin-bottom: 16px;
+        }
+        .highlight{
+            display: inline;
+            box-shadow: inset 0 -14px 0 #FFF493; 
+        }
+    </style>
+</head>
+<body>
+    <!-- header -->
+    <div class="header">
+        <h1><a onclick="location.href='/'">책영감</a></h1>
+        <div class="headerInfo">
+        <h3><a onclick="location.href='/upload-image'">작성하기</a></h3>
+        <div class="verticalDivider"></div>
+        <h3><a onclick="location.href='/login'">로그인</a></h3>
+        </div>
+    </div>
+    <!-- contents -->
+    <center>
+        <div class="main">
+            <div class="welcome">환영합니다!</div>
+            <h3 style="font-weight: 500; margin-bottom: 56px;">
+                번거롭던 독서기록 <span class="highlight">책영감</span>과 함께라면 쉬워요.<br/> 
+                능동적인 독서를 시작해보세요!
+            </h3>
+            <form action="/register" method="POST">
+                <div style="max-width: 450px;">
+                    <div class="column">
+                        <input class="login" type="text" id="username" name="username" placeholder="닉네임">
+                        <input class="login" type="text" id="userid" name="userid" placeholder="아이디">
+                        <input class="login" type="password" id="password" name="password" placeholder="비밀번호">
+                        <input class="login" type="password" id="re_password" name="re_password" placeholder="비밀번호 확인">
+                    </div>
+                    <button class="login" type="submit">회원 가입하기</button>
+                </div>
+            </form>
+        </div>
+    </center>
+</body>
+</html>

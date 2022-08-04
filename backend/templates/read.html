@@ -1,0 +1,41 @@
+<!doctype html>
+<html>
+  <head>
+    <title> 책영감 </title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" type='text/css' href="{{ url_for('static', filename='css/global.css') }}">
+    <link rel="stylesheet" type='text/css' href="{{ url_for('static', filename='css/post.css') }}">
+  </head>
+  <body>
+    <div class="header">
+      <h1><a onclick="location.href='/'">책영감</a></h1>
+      <div class="headerInfo">
+        {%if currentUser=="" %}
+          <h3>홈</h3>
+        {% else %}
+          <h3>{{currentUser}} 님</h3>
+        {% endif %}
+        <div class="verticalDivider"></div>
+        <h3><a onclick="location.href='/upload-image'">작성하기</a></h3>
+        <div class="verticalDivider"></div>
+        {%if currentUser=="" %}
+          <h3><a onclick="location.href='/login'">로그인</a></h3>
+        {% else %}
+          <h3><a onclick="location.href='/logout'">로그아웃</a></h3>
+        {% endif %}
+      </div>
+    </div>
+      <h2 style="font-weight: 600">[{{bookTitle}}] 독서노트</h2>
+      <div class="post">
+        <div class="text">저자: {{author}}</div>
+        <br/>
+        <!-- <div class="text">p. {{page}} <span style="font-style: italic">"참을 수 없는 존재의 가벼움"</span></div> -->
+        {%if ocrFinal!="" %}
+          <div class="text">p. {{page}} <span style="font-style: italic">"{{ocrFinal}}"</span></div>
+        {% endif %}
+        <div class="graytext">{{thought}}</div>
+        <br/>
+        <div class="text">{{date}}</div>
+      </div>
+  </body>
+</html>

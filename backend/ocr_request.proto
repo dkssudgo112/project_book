@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package ocr_request;
+
+service ocrApiService {
+  rpc goURL(urlMsg) returns (ApiResponse2);                    // url -> text
+}
+
+message urlMsg {
+    string url = 1;                   // url
+}
+
+
+message ApiResponse2{
+    bool result = 1;                        // success or fail
+    optional string response = 2;           // text
+}
+
+

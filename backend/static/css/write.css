@@ -1,0 +1,31 @@
+
+.input {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 25px;
+    flex-wrap: wrap;
+}
+
+input.underline { 
+    border: none;
+    border-bottom: 1px solid #858585;
+    color: #232323;
+    font-size: 18px;
+    /* margin-left: 2%; */
+    background-color: transparent;
+} 
+
+input.underline:focus {
+    outline: none;
+    border-bottom: 1px solid #232323;
+    box-shadow: 0 1 0 0 #232323;
+    background-color: transparent;
+}
+
+textarea {
+    font-size: 18px;
+    resize: none;
+    outline: none;
+    padding: 12px;
+}

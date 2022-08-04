@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>책영감</title>
+    <link rel="stylesheet" type='text/css' href="{{ url_for('static', filename='css/global.css') }}">
+    <link rel="stylesheet" type='text/css' href="{{ url_for('static', filename='css/button.css') }}">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+  </head>
+  <body>
+    <div class="header">
+      <h1><a onclick="location.href='/'">책영감</a></h1>
+      <div class="headerInfo">
+        {%if currentUser=="" %}
+          <h3>홈</h3>
+        {% else %}
+          <h3>{{currentUser}} 님</h3>
+        {% endif %}
+        <div class="verticalDivider"></div>
+        <h3 style="font-weight: bold;">작성하기</h3>
+        <div class="verticalDivider"></div>
+        {%if currentUser=="" %}
+          <h3><a onclick="location.href='/login'">로그인</a></h3>
+        {% else %}
+          <h3><a onclick="location.href='/logout'">로그아웃</a></h3>
+        {% endif %}
+      </div>
+    </div>
+    <center>
+      <div class="column" style="max-width: 500px;">
+        <form method="POST" enctype="multipart/form-data">
+          <h2 style="margin-bottom: 16px;">책 구절 이미지를 선택해주세요.</h2>
+          <img src="{{ url_for('static', filename='image/example.jpeg') }}" 
+            style="max-width: 100%; height: auto; margin-bottom: 5px;"/>
+          <h3 style="font-size: 12px; width: 100%; text-align: right; margin-bottom: 10px;">
+            (책 구절 이미지 예시)
+          </h3>
+          <input type="file" class="custom-file-input" name="image" id="image"
+            style="margin-bottom: 28px;">
+          <button type="submit" class="upload">Upload</button>
+          <button type="button" class="upload_inactive" onclick="location.href='/write-after-ocr'">건너뛰기</button>
+        </form>
+      </div>
+    </center>
+    
+    <!-- <img src="{{ uploaded_image }}"> -->
+    <!-- <img src="{{ url_for('send_uploaded_file', filename=uploaded_image) }}" /> -->
+  </body>
+</html>

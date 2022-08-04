@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>책영감</title>
+    <link rel="stylesheet" type='text/css' href="{{ url_for('static', filename='css/global.css') }}">
+    <link rel="stylesheet" type='text/css' href="{{ url_for('static', filename='css/button.css') }}">
+    <link rel="stylesheet" type='text/css' href="{{ url_for('static', filename='css/login.css') }}">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <style>
+        .main {
+            margin-top: 180px;
+        }
+    </style>
+</head>
+<body>
+    <!-- header -->
+    <div style="width: 100%;">
+    <div class="header">
+        <h1><a onclick="location.href='/'">책영감</a></h1>
+        <div class="headerInfo">
+            <h3><a onclick="location.href='/upload-image'">작성하기</a></h3>
+            <div class="verticalDivider"></div>
+            <h3 style="font-weight: bold;">로그인</h3>
+        </div>
+    </div>
+    </div>
+    <!-- contents -->
+    <center>
+        <div class="main">
+            <form action="/" method="POST">
+                <div style="max-width: 450px;">
+                        <div class="column">
+                        <input class="login" type="userid" name="userid" placeholder="아이디">
+                        <input class="login" type="password" name="password" placeholder="비밀번호">
+                    </div>
+                    <button class="login" type="submit" value="login">로그인</button>
+                </form>
+                <h3 style="text-decoration: underline;"><a onclick="location.href='/register'">회원 가입하기</a></h3>
+            </div>
+        </div>
+    </center>
+</body>
+</html>

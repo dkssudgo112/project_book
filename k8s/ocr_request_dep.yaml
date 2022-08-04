@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+        name: ocr-request
+        labels:
+                app: ocr-request
+spec:
+        replicas: 2
+        selector:
+                matchLabels:
+                        app: ocr-request
+        template:
+                metadata:
+                        labels:
+                                app: ocr-request
+                spec:
+                        containers:
+                                - name: ocr-request
+                                  image: bookgam:latest
+                                  imagePullPolicy: IfNotPresent
+                                  ports:
+                                          - containerPort: 8002
+                                  command: ["python3"]
+                                  args: ["./backend/ocr_request.py"]
+

@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+        name: main-server
+        labels:
+                app: main-server
+spec:
+        replicas: 2
+        selector:
+                matchLabels:
+                        app: main-server
+        template:
+                metadata:
+                        labels:
+                                app: main-server
+                spec:
+                        containers:
+                                - name: main-server
+                                  image: bookgam:latest
+                                  imagePullPolicy: IfNotPresent
+                                  ports:
+                                          - containerPort: 5000
+                                  command: ["python3"]
+                                  args: ["./backend/flasktest.py"]
+

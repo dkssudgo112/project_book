@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>책영감</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" type='text/css' href="{{ url_for('static', filename='css/global.css') }}">
+    <link rel="stylesheet" type='text/css' href="{{ url_for('static', filename='css/post.css') }}">
+  </head>
+  <body>
+    <!-- header -->
+    <div class="header">
+      <h1><a onclick="location.href='/'">책영감</a></h1>
+      <div class="headerInfo">
+        {%if currentUser=="" %}
+          <h3>홈</h3>
+        {% else %}
+          <h3>{{currentUser}} 님</h3>
+        {% endif %}
+        <div class="verticalDivider"></div>
+        <h3><a onclick="location.href='/upload-image'">작성하기</a></h3>
+        <div class="verticalDivider"></div>
+        {%if currentUser=="" %}
+          <h3><a onclick="location.href='/login'">로그인</a></h3>
+        {% else %}
+          <h3><a onclick="location.href='/logout'">로그아웃</a></h3>
+        {% endif %}
+      </div>
+    </div>
+    <!-- contents -->
+    <div class="posts">
+      {%if total==0  %}
+        <div class="post">
+          <div class="text">작성된 독서노트가 없습니다!<br/> 우측 상단의 작성하기를 통해 시작해보세요.</div>
+        </div>
+      {% endif %}        
+      {%if total > 0 and currentUser!="" %}
+      <div class="table-responsive">
+        <table class="table table-hover">
+          <tbody>
+            {% for user in users %}
+            <div class="post">
+              <a href="{{ url_for('read', my_var=loop.index + (page - 1) * per_page) }}">
+                <div class="title">[{{ user[0] }} - {{user[2]}}] 독서노트</div>
+                <div class="text">
+                  <p>p. {{user[1]}} {{user[3]}}</p>
+                </div>
+              </a>
+            </div>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+      {{ pagination.links }}
+      {% endif %}
+    </div>
+  </body>
+</html>
